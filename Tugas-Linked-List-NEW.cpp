@@ -12,11 +12,10 @@ struct Mahasiswa
 	string nama;
 	long NIM;
 	Mahasiswa* next;
-};
-Mahasiswa* head;
+} *head;
 
 // Membuat list, diawali dengan node pertama NULL
-void buat()
+void init()
 {
 	head = NULL;
 }
@@ -27,22 +26,21 @@ void isi(string input_nama, long input_NIM)
 	Mahasiswa* cur = new Mahasiswa;
 	Mahasiswa* prev = new Mahasiswa; // Pointer yang menunjuk node sebelum cur
 
+	// Inisialisasi prev dan cur
+	prev = NULL; cur = head;
+
 	// Node yang akan ditambahkan ke list
 	Mahasiswa* baru = new Mahasiswa;
 	baru->nama = input_nama;
 	baru->NIM = input_NIM;
 
-	// Inisialisasi prev dan cur
-	prev = NULL; cur = head;
 
 	// Jika linked list masih kosong
 	if (head == NULL) {
 		// Tetapkan variabel baru sebagai head dari linked list
 		head = baru;
 		baru->next = NULL;
-	}
-	// Jika linked list tidak kosong
-	else
+	} else // Jika linked list tidak kosong
 	{
 		/* Pengulangan yang berhenti ketika
 		elemen NIM dari node yang ditunjuk
@@ -129,7 +127,7 @@ void cetak() {
 // Fungsi main
 int main()
 {
-	buat(); // Menginisialisasi linked list
+	init(); // Menginisialisasi linked list
 
 	char menu;
 	cout << "Halo, selamat datang. ";
@@ -141,7 +139,7 @@ int main()
 			<< "\n1. Isi data mahasiswa"
 			<< "\n2. Hapus data mahasiswa"
 			<< "\n3. Lihat data mahasiswa"
-			<< "\nKetik x untuk keluar dari program\n>> ";
+			<< "\nKetik x untuk keluar dari program\n ";
 		cin >> menu;
 
 		// Pilih menu
@@ -149,18 +147,17 @@ int main()
 		switch (menu)
 		{
 		case '1':
-			cout << "Isi nama: \n>> ";
+			cout << "Isi nama: \n";
 			cin >> input_nama;
-			cout << "Isi NIM: \n>> ";
+			cout << "Isi NIM: \n";
 			cin >> input_NIM;
-			cin.ignore();
 			isi(input_nama, input_NIM);
 			break;
 
 		case '2':
-			cout << "Isi nama: \n>> ";
+			cout << "Isi nama: \n";
 			cin >> input_nama;
-			cout << "Isi NIM: \n>> ";
+			cout << "Isi NIM: \n";
 			cin >> input_NIM;
 			hapus(input_nama, input_NIM);
 			break;
